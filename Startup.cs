@@ -1,4 +1,6 @@
 using AddressBookMVC.Data;
+using AddressBookMVC.Services;
+using AddressBookMVC.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,8 @@ namespace AddressBookMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IImageService, BasicImageService>();
             
             services.AddControllersWithViews();
         }
